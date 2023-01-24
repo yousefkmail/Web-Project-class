@@ -1,0 +1,47 @@
+﻿@{
+    var games = ViewData["Games"] as List<Game>;
+    string editedGames = "";
+}
+<div class="cards-container">
+    <h2> 
+        <button>Pc</button>
+        <button onclick="handleclick(this , @Model)">Consol</button> 
+        <button onclick="handleclick(this) , @Model)">PlayStation</button>
+    </h2>
+    <div class="games-cards-container" >
+
+        @{
+            foreach (Game game in games)
+            { if (String.IsNullOrEmpty(editedGames))
+                {
+
+
+                    @await Html.PartialAsync("../Shared/GameCard", game )
+
+                    
+    }
+                else  if(game.type == editedGames)
+                {
+                    @await Html.PartialAsync("../Shared/GameCard", game )
+                    
+
+
+                }
+
+                
+            }
+
+        }
+        
+        
+
+    </div>
+</div>
+
+<script> function handleclick(e , number){
+
+    
+    @editedGames =e.innerHTML ;
+    
+}
+</script>
