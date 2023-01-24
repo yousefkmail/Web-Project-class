@@ -27,10 +27,12 @@ body {
 }
 
 .game-card-container {
-
+    overflow:hidden;
     opacity:1;
     transition : all ease-in 0.1s;
-    width:100%
+    width:100%;
+    aspect-ratio:3/5;
+
 }
 
 .game-card-container:hover {
@@ -41,6 +43,7 @@ body {
 .inner-card {
     width: 100%;
     position: relative;
+    object-fit:cover;
 }
     .inner-card::after {
         content: "";

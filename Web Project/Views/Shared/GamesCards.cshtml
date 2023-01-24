@@ -1,18 +1,29 @@
 ﻿@{
     var games = ViewData["Games"] as List<Game>;
-    string editedGames = "";
+    var editedGames ="" ;
+
+
+
+
+    void SetElements(EventHandler e, string value)
+    {
+        editedGames = e.Target.ToString();
+
+    }
 }
 <div class="cards-container">
     <h2> 
         <button>Pc</button>
-        <button onclick="handleclick(this , @Model)">Consol</button> 
-        <button onclick="handleclick(this) , @Model)">PlayStation</button>
+        <button onclick="SetElements">Consol</button>
+        <button onclick="SetElements">PlayStation</button>
+         <button ></button>
     </h2>
     <div class="games-cards-container" >
 
         @{
             foreach (Game game in games)
-            { if (String.IsNullOrEmpty(editedGames))
+            {
+                if (String.IsNullOrEmpty(editedGames))
                 {
 
 
@@ -39,9 +50,7 @@
 </div>
 
 <script> function handleclick(e , number){
+    
 
-    
-    @editedGames =e.innerHTML ;
-    
 }
 </script>
