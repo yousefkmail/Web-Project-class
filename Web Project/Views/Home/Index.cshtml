@@ -7,15 +7,7 @@
     
     <div >
     @await Html.PartialAsync("../Shared/Slider")
-        @{
-            List<Game> games = new List<Game>();
-            games.Add(new Game("over watch", "201812451", "https://blz-contentstack-images.akamaized.net/v3/assets/blta8f9a8e092360c6c/bltba0c762ec1e384bd/6387c01fc72c2b107a6f7db6/wow-dragonflight-rectangle-GC.jpg?format=webply&quality=80&auto=webp", "Pc"));
-            games.Add(new Game("over watch", "201812451", "https://blz-contentstack-images.akamaized.net/v3/assets/blta8f9a8e092360c6c/bltdf9dd58b1d2893d5/6324a79fe337fa0dc7263db4/overwatch2.jpg?format=webply&quality=80&auto=webp","Pc"));
-            games.Add(new Game("over watch", "201812451", "https://blz-contentstack-images.akamaized.net/v3/assets/blta8f9a8e092360c6c/blt931304c1c6dc6569/6332970fed7dcc6a002802b8/WoTLK_game-card-WoWClassic.jpg?format=webply&quality=80&auto=webp", "Consol"));
-            games.Add(new Game("over watch", "201812451", "https://blz-contentstack-images.akamaized.net/v3/assets/blta8f9a8e092360c6c/blt71e1f3ec632b3fe3/61a5156d43af6d102dc88ace/d2.jpg?format=webply&quality=80&auto=webp","Pc"));
-            games.Add(new Game("over watch", "201812451", "https://blz-contentstack-images.akamaized.net/v3/assets/blta8f9a8e092360c6c/blt14732d868dcaaebd/6287cff46eb6de7d054a58c8/diablo-immortal.jpg?format=webply&quality=80&auto=webp","Pc"));
-            ViewData["Games"] = games;
-        }
+       
     @await Html.PartialAsync("../Shared/GamesCards" )
 
     </div>

@@ -1,43 +1,23 @@
 ﻿@{
     var games = ViewData["Games"] as List<Game>;
-    var editedGames ="" ;
 
-
-
-
-    void SetElements(EventHandler e, string value)
-    {
-        editedGames = e.Target.ToString();
-
-    }
 }
 <div class="cards-container">
-    <h2> 
-        <button>Pc</button>
-        <button onclick="SetElements">Consol</button>
-        <button onclick="SetElements">PlayStation</button>
-         <button ></button>
-    </h2>
+   
+
+      <a asp-route-id="pc">Pc</a>
+      <a asp-route-id="console">Console</a>
+      <a asp-route-id="playstation">Playstation</a>
+
+      
     <div class="games-cards-container" >
 
         @{
             foreach (Game game in games)
             {
-                if (String.IsNullOrEmpty(editedGames))
-                {
-
-
                     @await Html.PartialAsync("../Shared/GameCard", game )
 
-                    
-    }
-                else  if(game.type == editedGames)
-                {
-                    @await Html.PartialAsync("../Shared/GameCard", game )
-                    
-
-
-                }
+                  
 
                 
             }
@@ -49,8 +29,8 @@
     </div>
 </div>
 
-<script> function handleclick(e , number){
+<script> function handleclick(e){
     
-
+    
 }
 </script>
