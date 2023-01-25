@@ -1,25 +1,27 @@
 ﻿@{
-    var games = ViewData["Games"] as List<Game>;
+    List<Game> games = ViewData["Games"] as List<Game>;
 
 }
+  
 <div class="cards-container">
-   
+      <div class="games-cards-header" >
+    <h2>Featured games </h2>
+    <div>
+            <a asp-route-id="">All Games</a>
 
       <a asp-route-id="pc">Pc</a>
       <a asp-route-id="console">Console</a>
       <a asp-route-id="playstation">Playstation</a>
 
-      
+    </div>
+    </div>
     <div class="games-cards-container" >
 
         @{
+            
             foreach (Game game in games)
             {
                     @await Html.PartialAsync("../Shared/GameCard", game )
-
-                  
-
-                
             }
 
         }
