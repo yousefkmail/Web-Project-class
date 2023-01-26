@@ -112,17 +112,24 @@ width : 100%;
 height : 100%;
 overflow:hidden ;
 display:grid ; 
-align-content:center;
+align-content: end;
 justify-content:center;
 }
 
-    .inner-card-game-name h2 {
-        transform: translateX(-200%);
-        transition: ease-in all 0.7s;
-        z-index: 4;
-        transition-delay: 0.5s;
-        color: #861B2D;
-    }
+.cards-continer-header{
+
+
+
+
+}
+
+.inner-card-game-name h2 {
+    transform: translateX(-200%);
+    transition: ease-in all 0.7s;
+    z-index: 4;
+    transition-delay: 0.5s;
+    color: white;
+}
 
 .inner-card-active  h2 {
 

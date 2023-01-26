@@ -4,23 +4,65 @@
 }
   
 <div class="cards-container">
-      <div class="games-cards-header" >
-    <h2>Featured games </h2>
+     <div class="games-cards-header" >
     <div>
-            <a asp-route-id="">All Games</a>
-
+      <a asp-route-id="">All Games</a>
       <a asp-route-id="pc">Pc</a>
       <a asp-route-id="console">Console</a>
       <a asp-route-id="playstation">Playstation</a>
 
     </div>
     </div>
+    <br />
+    <br />
+    <h2>Released games </h2>
+
     <div class="games-cards-container" >
+        @{
+
+            foreach (Game game in games)
+            { 
+                    @await Html.PartialAsync("../Shared/GameCard", game )
+            }
+
+        }
+        
+    </div>
+    <br />
+    <br />
+    <hr />
+    <br />
+    <br />
+
+    <h2>Early Access </h2>
+
+    <div class="games-cards-container">
 
         @{
             
             foreach (Game game in games)
             {
+                    @await Html.PartialAsync("../Shared/GameCard", game )
+            }
+
+        }
+
+
+
+    </div>
+     <br />
+     <br />
+     <hr />
+     <br />
+     <br />
+     <h2>Upcoming games </h2>
+
+    <div class="games-cards-container" >
+
+        @{
+            
+            foreach (Game game in games)
+            { 
                     @await Html.PartialAsync("../Shared/GameCard", game )
             }
 
