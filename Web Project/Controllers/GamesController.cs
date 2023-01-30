@@ -21,21 +21,20 @@ namespace Web_Project.Controllers
         // GET: Games
         public async Task<IActionResult> Index()
         {
-            Console.WriteLine(_context.Game.ToList().Count);
-              return _context.Game != null ? 
-                          View(await _context.Game.ToListAsync()) :
-                          Problem("Entity set 'GameContext.Game'  is null.");
+              return _context.Games != null ? 
+                          View(await _context.Games.ToListAsync()) :
+                          Problem("Entity set 'GameContext.Games'  is null.");
         }
 
         // GET: Games/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Game == null)
+            if (id == null || _context.Games == null)
             {
                 return NotFound();
             }
 
-            var game = await _context.Game
+            var game = await _context.Games
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (game == null)
             {
@@ -56,7 +55,7 @@ namespace Web_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,releaseDate,name,src,type")] Game game)
+        public async Task<IActionResult> Create([Bind("Id,releaseDate,name,src,type,GameStatus")] Game game)
         {
             if (ModelState.IsValid)
             {
@@ -70,12 +69,12 @@ namespace Web_Project.Controllers
         // GET: Games/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Game == null)
+            if (id == null || _context.Games == null)
             {
                 return NotFound();
             }
 
-            var game = await _context.Game.FindAsync(id);
+            var game = await _context.Games.FindAsync(id);
             if (game == null)
             {
                 return NotFound();
@@ -88,7 +87,7 @@ namespace Web_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,releaseDate,name,src,gameState,type")] Game game)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,releaseDate,name,src,type,GameStatus")] Game game)
         {
             if (id != game.Id)
             {
@@ -121,12 +120,12 @@ namespace Web_Project.Controllers
         // GET: Games/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Game == null)
+            if (id == null || _context.Games == null)
             {
                 return NotFound();
             }
 
-            var game = await _context.Game
+            var game = await _context.Games
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (game == null)
             {
@@ -141,14 +140,14 @@ namespace Web_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Game == null)
+            if (_context.Games == null)
             {
-                return Problem("Entity set 'GameContext.Game'  is null.");
+                return Problem("Entity set 'GameContext.Games'  is null.");
             }
-            var game = await _context.Game.FindAsync(id);
+            var game = await _context.Games.FindAsync(id);
             if (game != null)
             {
-                _context.Game.Remove(game);
+                _context.Games.Remove(game);
             }
             
             await _context.SaveChangesAsync();
@@ -157,7 +156,7 @@ namespace Web_Project.Controllers
 
         private bool GameExists(int id)
         {
-          return (_context.Game?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Games?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

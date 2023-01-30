@@ -129,6 +129,7 @@ justify-content:center;
     z-index: 4;
     transition-delay: 0.5s;
     color: white;
+    text-align:center;
 }
 
 .inner-card-active  h2 {

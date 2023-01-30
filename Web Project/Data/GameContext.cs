@@ -12,8 +12,7 @@ public class GameContext : DbContext
     {
     }
 
-    public DbSet<Web_Project.Models.Game> Game { get; set; } = default!;
-
+    public DbSet<Game> Games { get; set; } = default!;
 
    
     }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WebProject.Migrations
 {
     [DbContext(typeof(GameContext))]
-    [Migration("20230125183548_initial")]
+    [Migration("20230126113558_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -31,7 +31,7 @@ namespace WebProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("gameState")
+                    b.Property<int>("GameStatus")
                         .HasColumnType("int");
 
                     b.Property<string>("name")
@@ -52,7 +52,7 @@ namespace WebProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Game");
+                    b.ToTable("Games");
                 });
 #pragma warning restore 612, 618
         }

@@ -20,7 +20,7 @@ namespace Web_Project.Controllers
         {
       
             List<Game> filteredGames = new List<Game>();
-            foreach (var game in context.Game.ToList())
+            foreach (var game in context.Games.ToList())
             {
 
                 if (string.IsNullOrEmpty(id)) {
@@ -43,6 +43,11 @@ namespace Web_Project.Controllers
             ViewData["Games"] = filteredGames;
 
             return View();
+        }
+
+        public IActionResult Games() {
+            ViewData["Games"] = context.Games.ToList();
+        return View("GamesDescriptions");
         }
 
         public IActionResult Terms_of_services()
