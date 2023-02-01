@@ -30,7 +30,7 @@ namespace Web_Project.Controllers
 
                 }
 
-                else if (game.type.ToLower() == id.ToLower()) {
+                else if (game.Platform.Name.ToLower() == id.ToLower()) {
 
                     filteredGames.Add(game);
 

@@ -21,7 +21,7 @@
         @{
 
             foreach (Game game in games)
-            {  if(game.GameStatus == GameStatus.Released)
+            {  if(game.GameState.Name.ToLower() == "released")
                     @await Html.PartialAsync("../Shared/GameCard", game )
             }
 
@@ -42,8 +42,9 @@
             
             foreach (Game game in games)
             {
-                if (game.GameStatus == GameStatus.EarlyAccess)
-                    @await Html.PartialAsync("../Shared/GameCard", game )
+                
+                    if (game.GameState.Name.ToLower() == "earlyaccess")
+                        @await Html.PartialAsync("../Shared/GameCard", game )
             }
 
         }
@@ -63,7 +64,8 @@
         @{
             
             foreach (Game game in games)
-            { if(game.GameStatus == GameStatus.Upcoming)
+            {
+                if (game.GameState.Name.ToLower() == "upcoming")
                     @await Html.PartialAsync("../Shared/GameCard", game )
             }
 

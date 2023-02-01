@@ -21,9 +21,8 @@ namespace Web_Project.Controllers
         // GET: Games
         public async Task<IActionResult> Index()
         {
-              return _context.Games != null ? 
-                          View(await _context.Games.ToListAsync()) :
-                          Problem("Entity set 'GameContext.Games'  is null.");
+            var gameContext = _context.Games.Include(g => g.GameState).Include(g => g.Platform);
+            return View(await gameContext.ToListAsync());
         }
 
         // GET: Games/Details/5
@@ -35,7 +34,9 @@ namespace Web_Project.Controllers
             }
 
             var game = await _context.Games
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(g => g.GameState)
+                .Include(g => g.Platform)
+                .FirstOrDefaultAsync(m => m.GameId == id);
             if (game == null)
             {
                 return NotFound();
@@ -47,6 +48,8 @@ namespace Web_Project.Controllers
         // GET: Games/Create
         public IActionResult Create()
         {
+            ViewData["GameStateId"] = new SelectList(_context.gameStates, "Id", "Id");
+            ViewData["PlatformId"] = new SelectList(_context.Platforms, "Id", "Id");
             return View();
         }
 
@@ -55,7 +58,7 @@ namespace Web_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,releaseDate,name,src,type,GameStatus")] Game game)
+        public async Task<IActionResult> Create([Bind("GameId,releaseDate,name,src,GameStateId,PlatformId")] Game game)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +66,8 @@ namespace Web_Project.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GameStateId"] = new SelectList(_context.gameStates, "Id", "Id", game.GameStateId);
+            ViewData["PlatformId"] = new SelectList(_context.Platforms, "Id", "Id", game.PlatformId);
             return View(game);
         }
 
@@ -79,6 +84,8 @@ namespace Web_Project.Controllers
             {
                 return NotFound();
             }
+            ViewData["GameStateId"] = new SelectList(_context.gameStates, "Id", "Id", game.GameStateId);
+            ViewData["PlatformId"] = new SelectList(_context.Platforms, "Id", "Id", game.PlatformId);
             return View(game);
         }
 
@@ -87,9 +94,9 @@ namespace Web_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,releaseDate,name,src,type,GameStatus")] Game game)
+        public async Task<IActionResult> Edit(int id, [Bind("GameId,releaseDate,name,src,GameStateId,PlatformId")] Game game)
         {
-            if (id != game.Id)
+            if (id != game.GameId)
             {
                 return NotFound();
             }
@@ -103,7 +110,7 @@ namespace Web_Project.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GameExists(game.Id))
+                    if (!GameExists(game.GameId))
                     {
                         return NotFound();
                     }
@@ -114,6 +121,8 @@ namespace Web_Project.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GameStateId"] = new SelectList(_context.gameStates, "Id", "Id", game.GameStateId);
+            ViewData["PlatformId"] = new SelectList(_context.Platforms, "Id", "Id", game.PlatformId);
             return View(game);
         }
 
@@ -126,7 +135,9 @@ namespace Web_Project.Controllers
             }
 
             var game = await _context.Games
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(g => g.GameState)
+                .Include(g => g.Platform)
+                .FirstOrDefaultAsync(m => m.GameId == id);
             if (game == null)
             {
                 return NotFound();
@@ -156,7 +167,7 @@ namespace Web_Project.Controllers
 
         private bool GameExists(int id)
         {
-          return (_context.Games?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Games?.Any(e => e.GameId == id)).GetValueOrDefault();
         }
     }
 }

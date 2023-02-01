@@ -14,6 +14,9 @@ public class GameContext : DbContext
 
     public DbSet<Game> Games { get; set; } = default!;
 
-   
-    }
+    public DbSet<Platform> Platforms { get; set; } = default!;
+    public DbSet<GameState> gameStates { get; set; } = default!;
+
+
+}
 

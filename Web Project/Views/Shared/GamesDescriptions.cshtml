@@ -8,8 +8,9 @@
     <h2>Released Games</h2>
     foreach (Game game in games)
     {
-        if (game.GameStatus == GameStatus.Released) { 
-            <div style="display:flex ; flex-wrap:wrap  " >
+        
+            if (game.GameState.Name == "released"){
+                <div style="display:flex ; flex-wrap:wrap  ">
             <div style="width:200px" > 
         @await Html.PartialAsync("../Shared/GameCard", game )
         </div>
@@ -24,67 +25,12 @@
 
         }
 
-         
-
-         
-
-
-    }
-
-
-
-
-    <h2>Upcoming Games</h2>
-    foreach (Game game in games)
-    {
-        if (game.GameStatus == GameStatus.Upcoming)
-        {
-            <div style="display:flex ; flex-wrap:wrap  ">
-                <div style="width:200px">
-                    @await Html.PartialAsync("../Shared/GameCard", game )
-                </div>
-                @foreach (var prp in game.GetType().GetProperties())
-                {
-                    <div>
-                        <h3> @prp.Name </h3>
-                        <h3> @prp.GetValue(game) </h3>
-                    </div>
-                }
-            </div>
-
-        }
-
-
-    }
-
-    <h2>Early Access</h2>
-    foreach (Game game in games)
-    {
-        if (game.GameStatus == GameStatus.EarlyAccess)
-        { 
-            <div style="display:flex ; flex-wrap:wrap  " >
-                        <div style="width:200px" > 
-                    @await Html.PartialAsync("../Shared/GameCard", game )
-                    </div>
-                @foreach (var prp in game.GetType().GetProperties())
-                {
-                                      <div>    
-                                    <h3> @prp.Name </h3>
-                                    <h3> @prp.GetValue(game) </h3>
-                                    </div>
-                }
-            </div>
-
-        }
-
 
 
 
 
 
     }
-
-}
 
 }
 
