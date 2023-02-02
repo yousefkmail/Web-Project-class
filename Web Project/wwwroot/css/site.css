@@ -1,5 +1,6 @@
 html {
   font-size: 14px;
+  min-height:100vh;
 }
 
 @media (min-width: 768px) {
@@ -337,9 +338,10 @@ color:white;
     justify-content:center;
     align-items:flex-start;
     gap:20px 20px;
+    width:100%;
     padding:30px ; 
-    
-
+    position:absolute;
+    bottom:0;
 }
 
     .web-class-footer a {
@@ -370,7 +372,9 @@ color:white;
     pointer-events: none;
     display: flex;
     flex-direction: row;
-    color: rgba(0, 0, 0, 0.466);
+    color: rgb(0, 0, 0);
+    background-color:white;
+    opacity:1;
 }
 
 .input {
@@ -385,9 +389,10 @@ color:white;
 
     .input:focus + .placeholder,
     .input:not(:placeholder-shown) + .placeholder {
-        top: -16px;
+        top: -25px;
         background-color: #131A2A;
         color: white;
+        opacity:1;
         font-weight:bold;
     }
 

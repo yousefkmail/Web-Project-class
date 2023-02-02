@@ -1,6 +1,14 @@
 ﻿
 @model Admin
 
+<br /><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 
 <form asp-action="Login"  method="post">
 
@@ -12,7 +20,7 @@
         />
         <label class="placeholder">
           Name
-          <span style={{ color: "red", marginLeft: "3px", paddingTop: "3px" }}>
+          <span style="color:red; margin-left:3px;padding-top: 3px">
             *
           </span>
         </label>
@@ -27,14 +35,14 @@
         />
         <label class="placeholder">
           Password
-          <span style={{ color: "red", marginLeft: "3px", paddingTop: "3px" }}>
-            *
-          </span>
+                <span style="color:red; margin-left:3px;padding-top: 3px">
+                    *
+                </span>
         </label>
       </div>
     </div>
 
-   <input  type="submit" value="log in" />
+   <input class="btn-light"  type="submit" value="log in" />
 </form>
 
 

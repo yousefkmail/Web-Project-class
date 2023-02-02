@@ -19,6 +19,7 @@ namespace Web_Project.Controllers
 
         public IActionResult Index(string id)
         {
+            ViewData["bool"] = string.IsNullOrEmpty(HttpContext.Session.GetString("uid"));
             var games = context.Games.Include(s => s.GameState).
                 Include(s => s.Platform).Where(s=>s.Platform.Name==id);
 

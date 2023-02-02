@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model bool 
 @{
 }
 
@@ -8,10 +6,18 @@
     <div style="display:flex"> 
     <div  class="web-class-btn" > <a asp-controller="Home" asp-action="index">Home</a></div>
     <div class="web-class-btn"> <a>About</a></div>
+        @if (!@Model)
+        {
+
+            <div class="web-class-btn"> <a asp-controller="Games" asp-action="Create">Add game</a></div>
+
+
+
+        }
+
     </div>
     <div class="web-class-btn"> <a asp-controller="Home" asp-action="Login">Log In</a></div>
-
-
+ 
 
 
 </div>
