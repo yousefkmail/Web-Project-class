@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WebProject.Migrations
 {
     [DbContext(typeof(GameContext))]
-    [Migration("20230201095951_initial")]
-    partial class initial
+    [Migration("20230201220016_admins")]
+    partial class admins
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,6 +22,27 @@ namespace WebProject.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Web_Project.Models.Admin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("admins");
+                });
 
             modelBuilder.Entity("Web_Project.Models.Game", b =>
                 {
@@ -67,7 +88,6 @@ namespace WebProject.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -84,7 +104,6 @@ namespace WebProject.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -95,13 +114,13 @@ namespace WebProject.Migrations
             modelBuilder.Entity("Web_Project.Models.Game", b =>
                 {
                     b.HasOne("Web_Project.Models.GameState", "GameState")
-                        .WithMany()
+                        .WithMany("Games")
                         .HasForeignKey("GameStateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Web_Project.Models.Platform", "Platform")
-                        .WithMany()
+                        .WithMany("Games")
                         .HasForeignKey("PlatformId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -109,6 +128,16 @@ namespace WebProject.Migrations
                     b.Navigation("GameState");
 
                     b.Navigation("Platform");
+                });
+
+            modelBuilder.Entity("Web_Project.Models.GameState", b =>
+                {
+                    b.Navigation("Games");
+                });
+
+            modelBuilder.Entity("Web_Project.Models.Platform", b =>
+                {
+                    b.Navigation("Games");
                 });
 #pragma warning restore 612, 618
         }

@@ -48,8 +48,14 @@ namespace Web_Project.Controllers
         // GET: Games/Create
         public IActionResult Create()
         {
-            ViewData["GameStateId"] = new SelectList(_context.gameStates, "Id", "Id");
-            ViewData["PlatformId"] = new SelectList(_context.Platforms, "Id", "Id");
+
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("uid"))) {
+
+                return Redirect("/");
+            }
+            ViewData["GameState"] = new SelectList(_context.gameStates, "Id", "Name");
+            ViewData["Platform"] = new SelectList(_context.Platforms, "Id", "Name");
+
             return View();
         }
 
@@ -62,7 +68,7 @@ namespace Web_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(game);
+                _context.Games.Add(game);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

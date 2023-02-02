@@ -2,8 +2,8 @@
 {
     public class Platform
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public int Id { get; set; }
-        List<Game> games { get; } = new ();
+     public   List<Game> Games { get; } = new ();
     }
 }

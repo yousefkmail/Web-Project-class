@@ -1,0 +1,41 @@
+﻿
+@model Admin
+
+
+<form asp-action="Login"  method="post">
+
+ <div class="inputcontainer">
+      <div class="inputgroup">
+        <input asp-for="Name"
+          class="input"
+          placeholder=" "
+        />
+        <label class="placeholder">
+          Name
+          <span style={{ color: "red", marginLeft: "3px", paddingTop: "3px" }}>
+            *
+          </span>
+        </label>
+      </div>
+    </div>
+
+     <div class="inputcontainer">
+      <div class="inputgroup">
+        <input asp-for="Password"
+          class="input"
+          placeholder=" "
+        />
+        <label class="placeholder">
+          Password
+          <span style={{ color: "red", marginLeft: "3px", paddingTop: "3px" }}>
+            *
+          </span>
+        </label>
+      </div>
+    </div>
+
+   <input  type="submit" value="log in" />
+</form>
+
+
+

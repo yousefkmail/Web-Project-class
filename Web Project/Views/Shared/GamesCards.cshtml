@@ -19,10 +19,11 @@
 
     <div class="games-cards-container" >
         @{
-
+            
             foreach (Game game in games)
-            {  if(game.GameState.Name.ToLower() == "released")
-                    @await Html.PartialAsync("../Shared/GameCard", game )
+            {
+                if(game.GameState.Name.ToLower() == "released")
+                    @await Html.PartialAsync("../Shared/GameCard", game );
             }
 
         }
@@ -44,7 +45,7 @@
             {
                 
                     if (game.GameState.Name.ToLower() == "earlyaccess")
-                        @await Html.PartialAsync("../Shared/GameCard", game )
+                        @await Html.PartialAsync("../Shared/GameCard", game );
             }
 
         }
@@ -66,7 +67,7 @@
             foreach (Game game in games)
             {
                 if (game.GameState.Name.ToLower() == "upcoming")
-                    @await Html.PartialAsync("../Shared/GameCard", game )
+                    @await Html.PartialAsync("../Shared/GameCard", game );
             }
 
         }
