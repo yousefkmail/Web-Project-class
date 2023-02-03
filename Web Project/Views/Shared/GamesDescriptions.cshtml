@@ -8,9 +8,9 @@
     <h2>Released Games</h2>
     foreach (Game game in games)
     {
-        
-            if (game.GameState.Name == "released"){
-                <div style="display:flex ; flex-wrap:wrap  ">
+
+        if (game.GameState.Name.ToLower() == "released"){
+            <div style="display:flex ; flex-wrap:wrap  ">
             <div style="width:200px" > 
         @await Html.PartialAsync("../Shared/GameCard", game )
         </div>

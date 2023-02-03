@@ -1,0 +1,25 @@
+﻿@model Game
+@{
+}
+
+<div style=" margin-top : 200px; display:flex ; padding:10px 5% ;flex-wrap:wrap">
+    <div style="width:min(500px,100%);"> 
+    @await Html.PartialAsync("../Shared/GameCard", Model )
+    </div>
+    <div style="width:min(500px,90%) ; overflow-wrap:break-word ; font-size:12px; margin:2% ">
+        
+      
+        @foreach (var prop in Model.GetType().GetProperties())
+    {
+         <h6 >@prop.Name</h6>
+            <h6>@prop.GetValue(Model)?.ToString()</h6>
+     <hr />
+    }
+
+    </div>
+
+
+</div>
+<form asp-controller="Games" asp-action="Delete" asp-route-id="@Model.GameId" method="post">
+    <button style="border-radius:7px;background-color:red ; color:white ; width:200px ; height:50px; margin:5%"  type="submit">Delete This Game</button>
+</form>

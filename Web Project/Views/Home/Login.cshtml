@@ -1,13 +1,8 @@
 ﻿
 @model Admin
 
-<br /><br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+<div class="web-class-login-form">
+
 
 
 <form asp-action="Login"  method="post">
@@ -24,6 +19,8 @@
             *
           </span>
         </label>
+           <span asp-validation-for="Name" class="text-danger"></span>
+
       </div>
     </div>
 
@@ -39,11 +36,13 @@
                     *
                 </span>
         </label>
+                <span asp-validation-for="Password" class="text-danger"></span>
+
       </div>
     </div>
 
-   <input class="btn-light"  type="submit" value="log in" />
+   <input class="web-class-login-btn"  type="submit" value="log in" />
 </form>
 
-
+</div>
 

@@ -18,16 +18,23 @@ namespace Web_Project.Controllers
             _context = context;
         }
 
+       
+
         // GET: Games
         public async Task<IActionResult> Index()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("uid")))
+                return RedirectToAction("Login", "Home");
             var gameContext = _context.Games.Include(g => g.GameState).Include(g => g.Platform);
             return View(await gameContext.ToListAsync());
         }
 
         // GET: Games/Details/5
+
         public async Task<IActionResult> Details(int? id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("uid")))
+                return RedirectToAction("Login", "Home");
             if (id == null || _context.Games == null)
             {
                 return NotFound();
@@ -46,24 +53,20 @@ namespace Web_Project.Controllers
         }
 
         // GET: Games/Create
+
         public IActionResult Create()
         {
-
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("uid"))) {
-
-                return Redirect("/");
-            }
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("uid")))
+                return RedirectToAction("Login", "Home");
             ViewData["GameState"] = new SelectList(_context.gameStates, "Id", "Name");
             ViewData["Platform"] = new SelectList(_context.Platforms, "Id", "Name");
 
             return View();
         }
 
-        // POST: Games/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Create([Bind("GameId,releaseDate,name,src,GameStateId,PlatformId")] Game game)
         {
             if (ModelState.IsValid)
@@ -72,91 +75,27 @@ namespace Web_Project.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GameStateId"] = new SelectList(_context.gameStates, "Id", "Id", game.GameStateId);
-            ViewData["PlatformId"] = new SelectList(_context.Platforms, "Id", "Id", game.PlatformId);
+            ViewData["GameState"] = new SelectList(_context.gameStates, "Id", "Name");
+            ViewData["Platform"] = new SelectList(_context.Platforms, "Id", "Name");
             return View(game);
         }
 
-        // GET: Games/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Games == null)
-            {
-                return NotFound();
-            }
+        public IActionResult Game(int? id) {
+          Game? game =  _context.Games.FirstOrDefault(a => a.GameId == id);
+            if(game == null)
+            
+                return Redirect("/");
 
-            var game = await _context.Games.FindAsync(id);
-            if (game == null)
-            {
-                return NotFound();
-            }
-            ViewData["GameStateId"] = new SelectList(_context.gameStates, "Id", "Id", game.GameStateId);
-            ViewData["PlatformId"] = new SelectList(_context.Platforms, "Id", "Id", game.PlatformId);
-            return View(game);
+            
+        return View(game);
+        
         }
 
-        // POST: Games/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GameId,releaseDate,name,src,GameStateId,PlatformId")] Game game)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id != game.GameId)
-            {
-                return NotFound();
-            }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(game);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!GameExists(game.GameId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["GameStateId"] = new SelectList(_context.gameStates, "Id", "Id", game.GameStateId);
-            ViewData["PlatformId"] = new SelectList(_context.Platforms, "Id", "Id", game.PlatformId);
-            return View(game);
-        }
-
-        // GET: Games/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Games == null)
-            {
-                return NotFound();
-            }
-
-            var game = await _context.Games
-                .Include(g => g.GameState)
-                .Include(g => g.Platform)
-                .FirstOrDefaultAsync(m => m.GameId == id);
-            if (game == null)
-            {
-                return NotFound();
-            }
-
-            return View(game);
-        }
-
-        // POST: Games/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
             if (_context.Games == null)
             {
                 return Problem("Entity set 'GameContext.Games'  is null.");
@@ -168,7 +107,7 @@ namespace Web_Project.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Redirect("/");
         }
 
         private bool GameExists(int id)

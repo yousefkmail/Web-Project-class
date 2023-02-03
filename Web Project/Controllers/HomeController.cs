@@ -17,9 +17,19 @@ namespace Web_Project.Controllers
          
         }
 
+        public void ShowLoggedInLayout() {
+
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("uid")))
+            {
+                ViewData["isAdmin"] = "Loggedin";
+            }
+
+
+        }
+
         public IActionResult Index(string id)
         {
-            ViewData["bool"] = string.IsNullOrEmpty(HttpContext.Session.GetString("uid"));
+            ShowLoggedInLayout();
             var games = context.Games.Include(s => s.GameState).
                 Include(s => s.Platform).Where(s=>s.Platform.Name==id);
 
@@ -42,7 +52,10 @@ namespace Web_Project.Controllers
             return View();
         }
 
-        public IActionResult Login() { 
+        public IActionResult Login() {
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("uid")))
+                return Redirect("/");
+            
          return View();
         }
 
@@ -61,17 +74,23 @@ namespace Web_Project.Controllers
         }
         
         public IActionResult Games() {
-            ViewData["Games"] = context.Games.ToList();
+
+            ShowLoggedInLayout();
+
+            ViewData["Games"] = context.Games.Include(s => s.GameState).ToList();
         return View("GamesDescriptions");
         }
 
         public IActionResult Terms_of_services()
         {
+            ShowLoggedInLayout();
+
             return View();
         }
 
         public IActionResult About()
         {
+            ShowLoggedInLayout();
 
             return View("Index");
 

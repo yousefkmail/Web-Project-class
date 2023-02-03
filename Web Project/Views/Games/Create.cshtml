@@ -4,34 +4,75 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-<h4>Game</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div >
+    <div class="add-game-container">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="releaseDate" class="control-label"></label>
-                <input asp-for="releaseDate" class="form-control" />
-                <span asp-validation-for="releaseDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="name" class="control-label"></label>
-                <input asp-for="name" class="form-control" />
-                <span asp-validation-for="name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="src" class="control-label"></label>
-                <input asp-for="src" class="form-control" />
-                <span asp-validation-for="src" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GameStateId" class="control-label"></label>
+
+             <div class="inputcontainer">
+      <div class="inputgroup">
+        <input asp-for="name"
+          class="input"
+          placeholder=" "
+        />
+        <label class="placeholder">
+          Name
+          <span style="color:red; margin-left:3px;padding-top: 3px">
+            *
+          </span>
+        </label>
+           <span asp-validation-for="name" class="text-danger"></span>
+
+      </div>
+    </div>
+
+
+          <div class="inputcontainer">
+      <div class="inputgroup">
+        <input asp-for="releaseDate"
+          class="input"
+          placeholder=" "
+        />
+        <label class="placeholder">
+          Release Date
+          <span style="color:red; margin-left:3px;padding-top: 3px">
+            *
+          </span>
+        </label>
+           <span asp-validation-for="releaseDate" class="text-danger"></span>
+
+      </div>
+    </div>
+
+
+          <div class="inputcontainer">
+      <div class="inputgroup">
+        <input asp-for="src"
+          class="input"
+          placeholder=" "
+        />
+        <label class="placeholder">
+          Image Url
+          <span style="color:red; margin-left:3px;padding-top: 3px">
+            *
+          </span>
+        </label>
+           <span asp-validation-for="src" class="text-danger"></span>
+
+      </div>
+    </div>
+
+
+
+           
+
+
+            <div class="inputcontainer">
+                <label asp-for="GameStateId" class="control-label">Game state</label>
                 <select asp-for="GameStateId" class ="form-control" asp-items="ViewBag.GameState"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="PlatformId" class="control-label"></label>
+            <div class="inputcontainer">
+                <label asp-for="PlatformId" class="control-label">Platform</label>
                 <select asp-for="PlatformId" class ="form-control" asp-items="ViewBag.Platform"></select>
             </div>
             <div class="form-group">
@@ -39,10 +80,6 @@
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
