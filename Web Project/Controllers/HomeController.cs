@@ -61,7 +61,7 @@ namespace Web_Project.Controllers
 
         [HttpPost]
         public IActionResult Login([Bind("Name,Password")] Admin admin) {
-            if(context.admins.FirstOrDefault(a=>a.Name ==admin.Name && a.Password == admin.Password)!=null)
+            if(context.Admins.FirstOrDefault(a=>a.Name ==admin.Name && a.Password == admin.Password)!=null)
             {
 
                 HttpContext.Session.SetString("uid" , admin.Name );

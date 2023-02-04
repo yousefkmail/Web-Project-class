@@ -38,7 +38,27 @@ namespace WebProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("admins");
+                    b.ToTable("Admins");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "yousef",
+                            Password = "123"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "ali",
+                            Password = "234"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "hi",
+                            Password = "345"
+                        });
                 });
 
             modelBuilder.Entity("Web_Project.Models.Game", b =>
@@ -74,6 +94,53 @@ namespace WebProject.Migrations
                     b.HasIndex("PlatformId");
 
                     b.ToTable("Games");
+
+                    b.HasData(
+                        new
+                        {
+                            GameId = 1,
+                            GameStateId = 1,
+                            PlatformId = 1,
+                            name = "Overwatch",
+                            releaseDate = "12/2",
+                            src = "https://blz-contentstack-images.akamaized.net/v3/assets/blta8f9a8e092360c6c/bltdf9dd58b1d2893d5/6324a79fe337fa0dc7263db4/overwatch2.jpg?format=webply&quality=80&auto=webp"
+                        },
+                        new
+                        {
+                            GameId = 2,
+                            GameStateId = 2,
+                            PlatformId = 2,
+                            name = "Overwatch",
+                            releaseDate = "12/2",
+                            src = "https://blz-contentstack-images.akamaized.net/v3/assets/blta8f9a8e092360c6c/bltdf9dd58b1d2893d5/6324a79fe337fa0dc7263db4/overwatch2.jpg?format=webply&quality=80&auto=webp"
+                        },
+                        new
+                        {
+                            GameId = 3,
+                            GameStateId = 3,
+                            PlatformId = 3,
+                            name = "Overwatch",
+                            releaseDate = "12/2",
+                            src = "https://blz-contentstack-images.akamaized.net/v3/assets/blta8f9a8e092360c6c/bltdf9dd58b1d2893d5/6324a79fe337fa0dc7263db4/overwatch2.jpg?format=webply&quality=80&auto=webp"
+                        },
+                        new
+                        {
+                            GameId = 4,
+                            GameStateId = 3,
+                            PlatformId = 1,
+                            name = "Heroes of the storm",
+                            releaseDate = "12/2",
+                            src = "https://blz-contentstack-images.akamaized.net/v3/assets/blta8f9a8e092360c6c/bltce07525c7490946d/61a50fc22e73ff101cdc1c8d/heroes.jpg?format=webply&quality=80&auto=webp"
+                        },
+                        new
+                        {
+                            GameId = 5,
+                            GameStateId = 2,
+                            PlatformId = 2,
+                            name = "Starcraft II",
+                            releaseDate = "12/2",
+                            src = "https://blz-contentstack-images.akamaized.net/v3/assets/blta8f9a8e092360c6c/blt3873027b9450f357/61a50f033c4e21100a80f1fc/starcraft2.jpg?format=webply&quality=80&auto=webp"
+                        });
                 });
 
             modelBuilder.Entity("Web_Project.Models.GameState", b =>
@@ -90,6 +157,23 @@ namespace WebProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("gameStates");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Released"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "EarlyAccess"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Upcoming"
+                        });
                 });
 
             modelBuilder.Entity("Web_Project.Models.Platform", b =>
@@ -106,6 +190,23 @@ namespace WebProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Platforms");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Pc"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Console"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Playstation"
+                        });
                 });
 
             modelBuilder.Entity("Web_Project.Models.Game", b =>
