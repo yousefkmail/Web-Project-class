@@ -25,7 +25,6 @@ namespace Web_Project.Models
         public int GameStateId { get; set; }
         [Required(ErrorMessage = "Please pick Platform")]
 
-
         public int PlatformId { get; set; }
         public Platform? Platform { get; set; }
 

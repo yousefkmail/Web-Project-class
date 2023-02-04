@@ -23,6 +23,12 @@ namespace Web_Project.Controllers
         // GET: Games
         public async Task<IActionResult> Index()
         {
+
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("uid")))
+            {
+                ViewData["isAdmin"] = "Loggedin";
+            }
+
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("uid")))
                 return RedirectToAction("Login", "Home");
             var gameContext = _context.Games.Include(g => g.GameState).Include(g => g.Platform);
@@ -33,6 +39,12 @@ namespace Web_Project.Controllers
 
         public async Task<IActionResult> Details(int? id)
         {
+
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("uid")))
+            {
+                ViewData["isAdmin"] = "Loggedin";
+            }
+
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("uid")))
                 return RedirectToAction("Login", "Home");
             if (id == null || _context.Games == null)
@@ -56,6 +68,12 @@ namespace Web_Project.Controllers
 
         public IActionResult Create()
         {
+
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("uid")))
+            {
+                ViewData["isAdmin"] = "Loggedin";
+            }
+
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("uid")))
                 return RedirectToAction("Login", "Home");
             ViewData["GameState"] = new SelectList(_context.gameStates, "Id", "Name");
@@ -69,11 +87,17 @@ namespace Web_Project.Controllers
 
         public async Task<IActionResult> Create([Bind("GameId,releaseDate,name,src,GameStateId,PlatformId")] Game game)
         {
+
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("uid")))
+            {
+                ViewData["isAdmin"] = "Loggedin";
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Games.Add(game);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create));
             }
             ViewData["GameState"] = new SelectList(_context.gameStates, "Id", "Name");
             ViewData["Platform"] = new SelectList(_context.Platforms, "Id", "Name");
@@ -81,7 +105,13 @@ namespace Web_Project.Controllers
         }
 
         public IActionResult Game(int? id) {
-          Game? game =  _context.Games.FirstOrDefault(a => a.GameId == id);
+
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("uid")))
+            {
+                ViewData["isAdmin"] = "Loggedin";
+            }
+
+            Game? game =  _context.Games.FirstOrDefault(a => a.GameId == id);
             if(game == null)
             
                 return Redirect("/");
@@ -95,6 +125,12 @@ namespace Web_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
+
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("uid")))
+            {
+                ViewData["isAdmin"] = "Loggedin";
+            }
+
 
             if (_context.Games == null)
             {

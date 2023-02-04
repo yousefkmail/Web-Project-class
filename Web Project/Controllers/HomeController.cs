@@ -72,6 +72,18 @@ namespace Web_Project.Controllers
             return View();
         
         }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("uid");
+            return Redirect("/");   
+        }
+
+
+        public IActionResult  Player_Support() {
+
+            return View();
+        }
         
         public IActionResult Games() {
 
